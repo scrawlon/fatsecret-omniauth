@@ -1,4 +1,4 @@
-mniAuth Fatsecret Strategy
+# Auth Fatsecret Strategy
 
 This gem is an [OmniAuth] - [OAuth 1.0+] Strategy for the [FatSecret REST API]
 
@@ -24,11 +24,11 @@ requests on users' behalf.
  ___
 ## Installing
 
- Add the strategy to your `Gemfile`:
- ```
- gem 'omniauth-fatsecret'
- ```
- Then run `bundle install`
+Add the strategy to your `Gemfile`:
+```
+gem 'omniauth-fatsecret'
+```
+Then run `bundle install`
 
  ___
 ## Usage
@@ -39,7 +39,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 ```
 
-Now, configure your `auth/:provider/callback` as per the [OmniAuth] guide.
+Now, configure `/auth/:provider` as per the [OmniAuth] guide.
 When your app calls FatSecret and the user authorizes, the `request.env['omniauth.auth']` 
 hash will contain your user data.  
 
