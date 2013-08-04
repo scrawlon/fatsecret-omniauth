@@ -1,4 +1,4 @@
-# OmniAuth Fatsecret Strategy
+# OmniAuth FatSecret Strategy
 
 This gem is an [OmniAuth] - [OAuth 1.0+] Strategy for the [FatSecret REST API]
 
