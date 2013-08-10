@@ -2,17 +2,17 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "omniauth-fatsecret/version"
+require "fatsecret-omniauth/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "omniauth-fatsecret"
+  s.name        = "fatsecret-omniauth"
   s.version     = OmniAuth::Fatsecret::VERSION
   s.authors     = ["Scott McGrath"]
   s.email       = ["acid64k@yahoo.com"]
-  s.homepage    = "https://github.com/scrawlon/omniauth-fatsecret"
-  s.summary     = %q{OmniAuth strategy for FatSecret}
-  s.description = %q{OmniAuth strategy for FatSecret}
+  s.homepage    = "https://github.com/scrawlon/fatsecret-omniauth"
+  s.summary     = %q{FatSecret Authentication Gem}
+  s.description = %q{FatSecret Authentication Gem}
 
   s.files       = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files  = Dir["test/**/*"]

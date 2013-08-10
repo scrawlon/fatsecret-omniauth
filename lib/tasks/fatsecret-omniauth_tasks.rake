@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :omniauth-fatsecret do
+# task :fatsecret-omniauth do
 #   # Task goes here
 # end
