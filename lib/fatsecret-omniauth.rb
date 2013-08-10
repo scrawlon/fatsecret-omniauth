@@ -1,2 +1,2 @@
 require 'fatsecret-omniauth/version'
-require 'fatsecret-omniauth/strategies/fatsecret'
+require 'omniauth/strategies/fatsecret'
