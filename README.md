@@ -1,32 +1,17 @@
-# OmniAuth FatSecret Strategy
+# FatSecret OmniAuth Gem
 
-This gem is an [OmniAuth] - [OAuth 1.0+] Strategy for the [FatSecret REST API]
+First things first - This is NOT an [OmniAuth] Strategy. This is not meant to be used as a Login 
+method for web apps. This gem leverages OmniAuth's OAuth Strategy to obtain __auth tokens__ and 
+__auth secrets__ for use with the [FatSecret REST API].  
 
+[OmniAuth]: https://github.com/intridea/omniauth "OmniAuth"   
 [FatSecret REST API]: http://platform.fatsecret.com/api/Default.aspx?screen=rapih "FatSecret REST API"
-[OmniAuth]: https://github.com/intridea/omniauth "OmniAuth"
-[OAuth 1.0+]: https://github.com/pelle/oauth "OAuth 1.0+"
-
-___
-## Caveat
-
-A basic requirement for OmniAuth strategies is obtaining user names and user ids
-from API providers. Unfortunately, FatSecret doesn't provide either. Instead,
-FatSecret returns users' physical data profiles: height, weight, goal weight,
-etc. Furthermore, none of this data can be stored for more than 24 hours, as
-per the [Developer Terms of Service]. 
-
-Rather than authentication, the best use of this gem is to obtain 
-__auth_tokens__ and __auth_secrets__ from FatSecret. Use these to make API
-requests on users' behalf.
-
-[Developer Terms of Service]: http://platform.fatsecret.com/api/Default.aspx?screen=rapisd "Developer Terms of Service"  
- 
  ___
 ## Installing
 
 Add the strategy to your `Gemfile`:
 ```
-gem 'omniauth-fatsecret'
+gem 'fatsecret-omniauth'
 ```
 Then run `bundle install`
 
@@ -39,7 +24,12 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 ```
 
-Now, configure `/auth/:provider` as per the [OmniAuth] guide.
+__NOTE:__ Add your callback route in  `config/routes.rb`:  
+```
+provider :fatsecret, :callback_path => "YOUR_PATH_HERE"  
+```  
+*This is different than the normal OmniAuth callback route*  
+
 When your app calls FatSecret and the user authorizes, the `request.env['omniauth.auth']` 
 hash will contain your user data.  
 
@@ -55,3 +45,4 @@ hash will contain your user data.
 Copyright (c) 2013 Scott McGrath. See [LICENSE] for details.
 
 [LICENSE]: https://github.com/scrawlon/omniauth-fatsecret/blob/master/MIT-LICENSE "LICENSE"
+
