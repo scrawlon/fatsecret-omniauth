@@ -24,11 +24,13 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 ```
 
-__NOTE:__ Add your callback route in  `config/routes.rb`:  
+Add your callback route in  `config/routes.rb`:  
 ```
-provider :fatsecret, :callback_path => "YOUR_PATH_HERE"  
+get '/auth/fatsecret/callback', to: 'YOUR_CREATE_METHOD'
 ```  
-*This is different than the normal OmniAuth callback route*  
+__NOTE:__ *OmniAuth strategies use `get '/auth/:provider/callback', to: 'sessions#create'`.
+The FatSecret OmniAuth gem requires a custom controller/create method to save the
+auth tokens in a database for future API calls.*
 
 When your app calls FatSecret and the user authorizes, the `request.env['omniauth.auth']` 
 hash will contain your user data.  
