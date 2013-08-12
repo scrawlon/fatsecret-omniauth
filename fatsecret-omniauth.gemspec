@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{FatSecret Authentication Gem}
   s.description = %q{FatSecret Authentication Gem}
 
-  s.files       = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files       = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files  = Dir["test/**/*"]
 
   s.add_runtime_dependency 'omniauth-oauth', '~> 1.0'
