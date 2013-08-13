@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/scrawlon/fatsecret-omniauth"
   s.summary     = %q{FatSecret Authentication Gem}
   s.description = %q{FatSecret Authentication Gem}
+  s.license     = "MIT"
 
   s.files       = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files  = Dir["test/**/*"]
