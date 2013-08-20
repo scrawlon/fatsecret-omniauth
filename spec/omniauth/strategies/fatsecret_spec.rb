@@ -5,7 +5,7 @@ describe OmniAuth::Strategies::Fatsecret do
     OmniAuth::Strategies::Fatsecret.new({})
   end
 
-  context 'client options' do
+  context 'strategy client options' do
     it 'should have correct name' do
       expect(subject.options.name).to eq('fatsecret')
     end
