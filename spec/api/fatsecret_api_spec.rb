@@ -23,7 +23,8 @@ describe Fatsecret::Api do
   end
 
   context 'with valid arguments' do
-    tokens = { 'auth_token' => 'user_token', 'auth_secret' => 'user_secret' }
+    auth_token = 'user_token'
+    auth_secret = 'user_secret'
     params = { :method => 'foods.search', :search_expression => 'banana cream pie' }
     consumer_key = "user_consumer_key"
     consumer_secret = "user_consumer_secret"
@@ -33,11 +34,11 @@ describe Fatsecret::Api do
     end
     
     it 'should create an OAuth::AccessToken' do
-      expect(subject.build_request(tokens, consumer_key, consumer_secret).class).to eq(OAuth::AccessToken)
+      expect(subject.build_request(auth_token, auth_secret, consumer_key, consumer_secret).class).to eq(OAuth::AccessToken)
     end
 
     it 'should make successful api call ' do
-      expect(subject.api_call(tokens, consumer_key, consumer_secret, params).class).to eq(Net::HTTPOK)
+      expect(subject.api_call(auth_token, auth_secret, consumer_key, consumer_secret, params).class).to eq(Net::HTTPOK)
     end
   end
 end
