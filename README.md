@@ -16,8 +16,10 @@ gem 'fatsecret-omniauth'
 Then run `bundle install`
 
  ___
-## Usage
-Add the following to your middleware in `config/initializers/omniauth.rb`:
+## Authentication
+This works like any other OmniAuth strategy.
+Add the following to `config/initializers/omniauth.rb`:
+
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :fatsecret, 'consumer_key', 'consumer_secret'
@@ -32,14 +34,17 @@ __NOTE:__ *OmniAuth strategies use `get '/auth/:provider/callback', to: 'session
 The FatSecret OmniAuth gem requires a custom controller/create method to save the
 auth tokens in a database for future API calls.*
 
-When your app calls FatSecret and the user authorizes, the `request.env['omniauth.auth']` 
-hash will contain your user data.  
+To authenticate wuth FatSsecret
+* load `/auth/fatsecret`  
+* You'll be redirected to FatSecret.com to authenticate
+* If you agree to authenticate, you'll be redirected back `/auth/fatsecret/callback`
+* The `request.env['omniauth.auth']` hash will contain your FatSecret data.  
 
-* __FatSecret profile data__ is contained in:  
-`request.env['omniauth.auth']['info']` -- see the [FatSecret profile.get page] for more details.
-
-* __FatSecret auth token and auth secret__ are contained in:  
-`request.env['omniauth.auth']['credentials']`
+    * __FatSecret profile data__ is contained in:  
+    `request.env['omniauth.auth']['info']` -- see the [FatSecret profile.get page] for more details.
+    
+    * __FatSecret auth token and auth secret__ are contained in:  
+    `request.env['omniauth.auth']['credentials']`
 
 [FatSecret profile.get page]: http://platform.fatsecret.com/api/Default.aspx?screen=rapiref&method=profile.get "FatSecret profile.get page"  
 
