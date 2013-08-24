@@ -6,7 +6,7 @@ module Fatsecret
     }
   
     def api_call consumer_key, consumer_secret, params, auth_token=nil, auth_secret=nil
-      request = build_request(auth_token, auth_secret, consumer_key, consumer_secret)
+      request = build_request(consumer_key, consumer_secret, auth_token, auth_secret)
       request_params = uri(params)
       request.get "http://platform.fatsecret.com/rest/server.api?#{ request_params }"
     end
