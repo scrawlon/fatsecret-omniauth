@@ -126,11 +126,10 @@ If you had an apis_controller with a foods_search method, it might look like thi
 ```ruby
 class ApisController < ApplicationController
   def foods_search
-    params ||= {}
     params['method'] = 'foods.search'
     request = Fatsecret::Api.new({}).api_call(
-      ENV['FATSECRET_KEY'], 
-      ENV['FATSECRET_SECRET'], 
+      CONSUMER_KEY,
+      CONSUMER_SECRET, 
       params
     )   
     @response = request.body
