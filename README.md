@@ -100,7 +100,7 @@ Fatsecret::Api.new({}).api_call(
 ```
 
 The actual API
-request data is contained in the params hash. Simply read the 
+request data is contained in the params hash. Read the 
 [FatSecret REST API method docs] and supply the required parameters in the params hash. 
 
 [FatSecret REST API method docs]: http://platform.fatsecret.com/api/Default.aspx?screen=rapiref "FatSecret REST API method docs"
@@ -145,20 +145,17 @@ return your results in @response.
 * __FOR EXAMPLE:__  
     Assuming the ApisController mentioned above, and the following custom route:
 
-    `get '/food_search', to: 'apis#food_search'`
+    `get '/foods_search', to: 'apis#food_search'`
 
     You could create the form below to allow users to search foods on FatSecret.com.
 
 ```ruby
-<%= form_tag food_search_path, :method => "get" do %>
+<%= form_tag foods_search_path, :method => "get" do %>
   <%= label_tag(:search_expression, "Search for food:") %>
   <%= text_field_tag(:search_expression) %>
   <%= submit_tag("Search") %>
 <% end %> 
 ```
-
-[FatSecret, you could use the following route: REST API method docs]: http://platform.fatsecret.com/api/Default.aspx?screen=rapiref "FatSecret RESR API method docs"
-
 
 ---
 Copyright (c) 2013 Scott McGrath. See [LICENSE] for details.
