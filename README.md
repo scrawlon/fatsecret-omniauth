@@ -7,15 +7,20 @@ the [FatSecret REST API].
 
 [OmniAuth]: https://github.com/intridea/omniauth "OmniAuth"   
 [FatSecret REST API]: http://platform.fatsecret.com/api/Default.aspx?screen=rapih "FatSecret REST API"
- ___
+
+---
 ## Installing
 
-* Add the strategy to your `Gemfile`:
+* Add the gem to your `Gemfile`:
 
 ```
 gem 'fatsecret-omniauth'
 ```
-Then run `bundle install`
+
+* Run `bundle install`
+
+---
+## Authentication
 
 * Add the following to `config/initializers/omniauth.rb`:
 
@@ -26,15 +31,21 @@ end
 ```
 
 * Add your callback route in  `config/routes.rb`:  
+
 ```
-get '/auth/fatsecret/callback', to: 'YOUR_CREATE_METHOD'
+get '/auth/fatsecret/callback', to: 'YOUR_CONTROLLER#CREATE_METHOD'
 ```  
+
 __NOTE:__ *OmniAuth strategies use `get '/auth/:provider/callback', to: 'sessions#create'`.
 The FatSecret OmniAuth gem requires a custom controller/create method to save the
-auth tokens in a database for future API calls.*
+auth tokens in a database for future API calls. Also, you should place your fatsecret-omniauth
+route above your other OmniAuth routes. Otherwise, your API calls will be routed to sessions#create.*
 
- ___
-## Authentication
+* __FOR EXAMPLE:__  
+    If you had an ApiTokensController, you could use the following route:
+
+    `get '/auth/fatsecret/callback', to: 'api_tokens#create'`
+
 
 To authenticate with FatSsecret, and obtain auth tokens:  
 
@@ -56,7 +67,23 @@ To authenticate with FatSsecret, and obtain auth tokens:
 ---
 ## API calls
 
-The fatsecret-omniauth gem provides a simple way to make FatSecret API calls. Here's the structure of an API call:
+API calls are created with the `Fatsecret::Api.new({}).api_call()` method.
+FatSecret consumer keys are required, and a params hash containing
+the api call. Optionally, you can include an auth_key and auth_secret for
+authenticated calls.
+
+The structure of an api call looks like this:
+
+```ruby
+Fatsecret::Api.new({}).api_call(
+  CONSUMER_KEY,
+  CONSUMER_SECRET, 
+  params
+)`
+```
+
+The structure of an authenticated api call looks like this:
+
 ```ruby
 Fatsecret::Api.new({}).api_call(
   CONSUMER_KEY,
@@ -67,26 +94,25 @@ Fatsecret::Api.new({}).api_call(
 )`
 ```
 
-CONSUMER_KEY and CONSUMER_SECRET are the keys FatSecret provided when you
-signed up for an API account. The auth_token and auth_secret are optional, and
-only needed when making calls to a user's Fatsecret account. The actual API
+The actual API
 request data is contained in the params hash. Simply read the [FatSecret REST
 API method docs] and supply the required parameters in the params hash. 
 
 **NOTE** The following required parameters are automatically handled by the
 gem: __oauth_signature_method, oauth_timestamp, oauth_nonce, oauth_version and
-oauth_signature__. Also, you'll include your CONSUMER_KEY and CONSUMER_SECRET
-with every API call, so __oauth_consumer_key__ is taken care of as well.
+oauth_signature__. Also, since consumer keys are required 
+with every API call, __oauth_consumer_key__ is taken care of as well.
 
 As an example, if you wanted to call the __foods.search__ API method, the first
 thing you would do is look up __foods.search__ in the FatSecret API docs and
-find out what are the required parameters. Aside from the automatic parameters
+find the required parameters. Aside from the automatic parameters
 listed above, the only required parameter is  __method__, and it must be set to
 "foods.search".
 
 There are also several optional parameters: __format__, __oauth_token__,
-__search_expression__, __page_number__, and __max_results__. Since the
-__search_expression__ contains the actual search terms, we should include it.
+__search_expression__, __page_number__, and __max_results__. You can include
+any of these as well. The __search_expression__ would contain the food(s) you're
+searching for. 
 
 If you had an apis_controller with a foods_search method, it might look like this:
 
@@ -105,11 +131,28 @@ class ApisController < ApplicationController
 end
 ```
 
-Now you can create a form with a __'search_expression'__ field that submits to
-the __foods_search__ method of the apis_controller, and the FatSecret API will
+Nmw you can create a form with a __'search_expression'apis_controller__ field that submits to
+the __foods_search__ method of the ApisController, and the FatSecret API will
 return your results in @response.
 
-[FatSecret REST API method docs]: http://platform.fatsecret.com/api/Default.aspx?screen=rapiref "FatSecret RESR API method docs"
+
+* __FOR EXAMPLE:__  
+    Assuming the ApisController mentioned above, and the following custom route:
+
+    `get '/food_search', to: 'apis#food_serch'`
+
+    You could create the form below to allow users to search foods on FatSecret.com.
+
+```ruby
+<%= form_tag fatsecret_path, :method => "get" do %>
+  <%= label_tag(:search_expression, "Search for food:") %>
+  <%= text_field_tag(:search_expression) %>
+  <%= hidden_field_tag 'method', 'foods.search' %>
+  <%= submit_tag("Search") %>
+<% end %> 
+```
+
+[FatSecret, you could use the following route: REST API method docs]: http://platform.fatsecret.com/api/Default.aspx?screen=rapiref "FatSecret RESR API method docs"
 
 
 ---
