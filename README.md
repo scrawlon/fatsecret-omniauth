@@ -84,7 +84,7 @@ Fatsecret::Api.new({}).api_call(
   CONSUMER_KEY,
   CONSUMER_SECRET, 
   params
-)`
+)
 ```
 
 The structure of an authenticated api call looks like this:
@@ -96,7 +96,7 @@ Fatsecret::Api.new({}).api_call(
   params, 
   auth_token,
   auth_secret
-)`
+)
 ```
 
 The actual API
@@ -106,8 +106,8 @@ request data is contained in the params hash. Simply read the
 [FatSecret REST API method docs]: http://platform.fatsecret.com/api/Default.aspx?screen=rapiref "FatSecret REST API method docs"
 
 **NOTE** The following required parameters are automatically handled by the
-gem: __oauth_signature_method, oauth_timestamp, oauth_nonce, oauth_version and
-oauth_signature__. Also, since consumer keys are required 
+gem: __oauth_signature_method, oauth_timestamp, oauth_nonce, oauth_version__ and
+__oauth_signature__. Also, since consumer keys are required 
 with every API call, __oauth_consumer_key__ is taken care of as well.
 
 As an example, if you wanted to call the __foods.search__ API method, the first
@@ -138,7 +138,7 @@ class ApisController < ApplicationController
 end
 ```
 
-Now you can create a form with a __'search_expression' field that submits to
+Now you can create a form with a __'search_expression'__ field that submits to
 the __foods_search__ method of the ApisController, and the FatSecret API will
 return your results in @response.
 
@@ -146,7 +146,7 @@ return your results in @response.
 * __FOR EXAMPLE:__  
     Assuming the ApisController mentioned above, and the following custom route:
 
-    `get '/food_search', to: 'apis#food_serch'`
+    `get '/food_search', to: 'apis#food_search'`
 
     You could create the form below to allow users to search foods on FatSecret.com.
 
