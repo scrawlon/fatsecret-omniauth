@@ -5,7 +5,7 @@ module Fatsecret
       :http_method  => :get
     }
   
-    def api_call consumer_key, consumer_secret, params, auth_token=nil, auth_secret=nil
+    def api_call consumer_key, consumer_secret, params, auth_token="", auth_secret=""
       request = build_request(consumer_key, consumer_secret, auth_token, auth_secret)
       request_params = uri(params)
       request.get "http://platform.fatsecret.com/rest/server.api?#{ request_params }"
