@@ -100,8 +100,10 @@ Fatsecret::Api.new({}).api_call(
 ```
 
 The actual API
-request data is contained in the params hash. Simply read the [FatSecret REST
-API method docs] and supply the required parameters in the params hash. 
+request data is contained in the params hash. Simply read the 
+[FatSecret REST API method docs] and supply the required parameters in the params hash. 
+
+[FatSecret REST API method docs]: http://platform.fatsecret.com/api/Default.aspx?screen=rapiref "FatSecret REST API method docs"
 
 **NOTE** The following required parameters are automatically handled by the
 gem: __oauth_signature_method, oauth_timestamp, oauth_nonce, oauth_version and
