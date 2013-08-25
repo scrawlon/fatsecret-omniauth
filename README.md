@@ -81,8 +81,8 @@ The structure of an api call looks like this:
 
 ```ruby
 Fatsecret::Api.new({}).api_call(
-  CONSUMER_KEY,
-  CONSUMER_SECRET, 
+  'CONSUMER_KEY',
+  'CONSUMER_SECRET', 
   params
 )
 ```
@@ -91,11 +91,11 @@ The structure of an authenticated api call looks like this:
 
 ```ruby
 Fatsecret::Api.new({}).api_call(
-  CONSUMER_KEY,
-  CONSUMER_SECRET, 
+  'CONSUMER_KEY',
+  'CONSUMER_SECRET', 
   params, 
-  auth_token,
-  auth_secret
+  'auth_token',
+  'auth_secret'
 )
 ```
 
@@ -128,8 +128,8 @@ class ApisController < ApplicationController
   def foods_search
     params['method'] = 'foods.search'
     request = Fatsecret::Api.new({}).api_call(
-      CONSUMER_KEY,
-      CONSUMER_SECRET, 
+      'CONSUMER_KEY',
+      'CONSUMER_SECRET', 
       params
     )   
     @response = request.body
