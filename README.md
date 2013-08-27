@@ -145,12 +145,12 @@ return your results in @response.
 * __FOR EXAMPLE:__  
     Assuming the ApisController mentioned above, and the following custom route:
 
-    `get '/foods_search', to: 'apis#food_search'`
+    `post '/foods_search', to: 'apis#food_search'`
 
     You could create the form below to allow users to search foods on FatSecret.com.
 
 ```ruby
-<%= form_tag foods_search_path, :method => "get" do %>
+<%= form_tag foods_search_path %>
   <%= label_tag(:search_expression, "Search for food:") %>
   <%= text_field_tag(:search_expression) %>
   <%= submit_tag("Search") %>
