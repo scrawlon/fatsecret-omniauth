@@ -23,11 +23,11 @@ describe Fatsecret::Api do
   end
 
   context 'valid authenticated call' do
-    auth_token = 'user_token'
-    auth_secret = 'user_secret'
-    params = { :method => 'foods.search', :search_expression => 'banana cream pie' }
     consumer_key = "user_consumer_key"
     consumer_secret = "user_consumer_secret"
+    params = { :method => 'foods.search', :search_expression => 'banana cream pie' }
+    auth_token = 'user_token'
+    auth_secret = 'user_secret'
 
     it 'should uri encode the params hash' do
       expect(subject.uri(params)).to eq('method=foods.search&search_expression=banana%20cream%20pie')
