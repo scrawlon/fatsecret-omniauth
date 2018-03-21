@@ -1,4 +1,4 @@
-# FatSecret OmniAuth Gem v0.0.2
+# UNMAINTAINED -- FatSecret OmniAuth Gem v0.0.2
 
 First things first - This is NOT an [OmniAuth] Strategy. This is not meant to
 be used as a Login method for web apps. This gem leverages OmniAuth's OAuth
